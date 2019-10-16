@@ -6,7 +6,10 @@ const syncCallbacker = (res, rej) => {
     if (typeof res !== 'function' || typeof rej !== 'function'){
         throw error;
     }
-    return res(rej());
+    const someRandomNum = Math.random() * 100;
+
+    return rej(res(someRandomNum));
+
 };
 
 
@@ -18,10 +21,10 @@ const asyncCallbacker = (res, rej) => {
     if (typeof res !== 'function' || typeof rej !== 'function'){
         throw error;
     }
-    return res = (data,done) => {
-        rej (data,done);
+    const done = (data) => {
+        rej(data, done);
     }
+    res(data = null, done);    
 };
-
 
 module.exports = { syncCallbacker, asyncCallbacker };
